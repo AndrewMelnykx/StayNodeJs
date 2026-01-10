@@ -1,7 +1,8 @@
 import express from "express";
 
+import { PORT } from "./config/env.js";
+
 const app = express();
-const PORT = 3000;
 
 app.get("/", (req, res) => {
   res.send("Welcome to Subscription Tracker API");
