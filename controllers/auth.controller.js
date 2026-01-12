@@ -24,19 +24,17 @@ const signUp = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await user.create([{ name, email, password: hashPassword }, { session }]);
+    const newUser = await User.create([{ name, email, password: hashPassword }, { session }]);
     const token = jwt.sign({ userId: newUser[0]._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
     await session.commitTransaction();
     session.endSession();
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "User created successfully",
-        data: { token, user: newUser[0] },
-      });
+    res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: { token, user: newUser[0] },
+    });
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
