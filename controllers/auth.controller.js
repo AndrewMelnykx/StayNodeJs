@@ -24,7 +24,7 @@ const signUp = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await User.create([{ name, email, password: hashPassword }, { session }]);
+    const newUser = await User.create({ name, email, password: hashPassword }, { session });
     const token = jwt.sign({ userId: newUser[0]._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
     await session.commitTransaction();
