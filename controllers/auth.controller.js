@@ -60,7 +60,7 @@ const signIn = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    const token = jwt.sign({ userId: user._id, JWT_SECRET, expiresIn: JWT_EXPIRES_IN });
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
     return res.status(200).json({
       success: true,
