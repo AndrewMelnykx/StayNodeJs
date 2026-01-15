@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(arcjetMiddleware);
+// app.use(arcjetMiddleware); Shut down due dev mode
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);

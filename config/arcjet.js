@@ -7,7 +7,8 @@ const aj = arcjet({
     shield({ mode: "LIVE" }),
     detectBot({
       mode: "LIVE",
-      allow: ["CATEGORY:SEARCH_ENGINE , CATEGORY:PREVIEW"],
+      //Remove PREVIEW  right before deploying
+      allow: ["CATEGORY:SEARCH_ENGINE ,  CATEGORY:PREVIEW"],
     }),
     tokenBucket({
       mode: "LIVE",
