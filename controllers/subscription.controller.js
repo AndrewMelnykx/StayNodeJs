@@ -8,7 +8,14 @@ const createSubscription = async (req, res, next) => {
       ...req.body,
       user: req.user._id,
     });
-    await workFlowClient.trigger({ url: SERVER_URL, body: { subscriptionId: subscription._id } });
+    await workFlowClient.trigger({
+      url: `${SERVER_URL}/api/workflows/subscription/reminder`,
+      body: { subscriptionId: subscription.id },
+      headers: {
+        "content-type": "application/json",
+      },
+      retries: 0,
+    });
     res.status(201).json({ success: true, data: subscription });
   } catch (error) {
     next(error);
